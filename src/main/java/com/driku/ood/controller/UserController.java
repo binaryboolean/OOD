@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.d.ood.controller;
+package com.driku.ood.controller;
 
-import com.d.model.User;
-import com.d.ood.service.UserService;
+import com.driku.model.User;
+import com.driku.ood.service.UserService;
 import java.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -56,5 +57,11 @@ public class UserController {
             }
         }
         return "/userLogin";
+    }
+    
+     @RequestMapping(value = "invalidAccess")
+    public ModelAndView invalidAccess() {
+        return new ModelAndView("invalidAccess");
+        
     }
 }

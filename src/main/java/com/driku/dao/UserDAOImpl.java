@@ -1,23 +1,23 @@
 /**
  * ****************************************************************************
  *
- * Copyright (c) 2016, Mindfire Solutions and/or its affiliates. All rights
+ * Copyright (c) 2016, DRIKU Technologies and/or its affiliates. All rights
  * reserved.
  * ___________________________________________________________________________________
  *
  *
  * NOTICE: All information contained herein is, and remains the property of
- * Mindfire and its suppliers,if any. The intellectual and technical concepts
- * contained herein are proprietary to Mindfire Solutions. and its suppliers and
+ * DRIKU and its suppliers,if any. The intellectual and technical concepts
+ * contained herein are proprietary to DRIKU Technologies. and its suppliers and
  * may be covered by us and Foreign Patents, patents in process, and are
  * protected by trade secret or copyright law. Dissemination of this information
  * or reproduction of this material is strictly forbidden unless prior written
- * permission is obtained from Mindfire Solutions
+ * permission is obtained from DRIKU Technologies
  */
-package com.d.dao;
+package com.driku.dao;
 
-import com.d.constants.UserConstants;
-import com.d.model.User;
+import com.driku.constants.UserConstants;
+import com.driku.model.User;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
