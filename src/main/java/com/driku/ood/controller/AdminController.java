@@ -40,7 +40,6 @@ public class AdminController {
     @RequestMapping(value = "/admin/{mobileNumber}", method = RequestMethod.GET)
     @ResponseBody
     public User getUserByMobile(@PathVariable String mobileNumber, ModelMap model) {
-
         return userService.getUserByMobile(mobileNumber);
 
     }

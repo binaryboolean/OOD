@@ -46,4 +46,9 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllUsers() {
       return userDAO.getAllUsers();
     }
+
+    @Override
+    public User authenticateUser(String userEmail, String userPassword) {
+        return userDAO.authenticateUser(userEmail, userPassword);
+    }
 }

@@ -12,10 +12,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Admin Home</title>
-        <link rel="stylesheet" href="resources/css/bootstrap.min.css">
-        <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css">
     </head>
     <body>
+        <img id="bg" src="<%=request.getContextPath()%>/resources/images/bg.jpg" />
         <div class="panel panel-primary col-lg-10" style="margin: 0 auto;float: none;">
             <div class="panel-body">
                 <span style="text-align: center">
@@ -34,6 +34,7 @@
                 <div id="allUsersDiv"></div>
             </div>
         </div>
-        <script src="resources/js/welcome.js"></script>
+        <script  src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+        <script src="<%=request.getContextPath()%>/resources/js/welcome.js"></script>
     </body>
 </html>

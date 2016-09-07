@@ -5,9 +5,9 @@
  */
 package com.driku.ood.controller;
 
+import com.driku.constants.UserConstants;
 import com.driku.model.User;
 import com.driku.ood.service.UserService;
-import java.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,7 +29,7 @@ public class UserController {
     UserService userService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String welcomePage(ModelMap model, Principal principal) {
+    public String welcomePage(ModelMap model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = auth.getName();
         if (userEmail != null) {
@@ -42,26 +42,26 @@ public class UserController {
                     userRole = authority.getAuthority();
                 }
                 switch (userRole) {
-                    case "ROLE_ADMIN":
-                        model.addAttribute("greeting", "Hello " + userName);
-                        return "/admin/welcome";
-                    case "ROLE_PROVIDER":
-                        model.addAttribute("greeting", "Hello " + userName);
-                        return "/provider/welcome";
-                    case "ROLE_CONSUMER":
-                        model.addAttribute("greeting", "Hello " + userName);
-                        return "/consumer/welcome";
+                    case UserConstants.ROLE_ADMIN:
+                        model.addAttribute(UserConstants.WELCOME_GREETING_KEY, UserConstants.WELCOME_GREETING_ADMIN + userName);
+                        return UserConstants.WELCOME_PAGE_ADMIN;
+                    case UserConstants.ROLE_PROVIDER:
+                        model.addAttribute(UserConstants.WELCOME_GREETING_KEY, UserConstants.WELCOME_GREETING_PROVIDER + userName);
+                        return UserConstants.WELCOME_PAGE_PROVIDER;
+                    case UserConstants.ROLE_CONSUMER:
+                        model.addAttribute(UserConstants.WELCOME_GREETING_KEY, UserConstants.WELCOME_GREETING_CONSUMER + userName);
+                        return UserConstants.WELCOME_PAGE_CONSUMER;
                     default:
                         break;
                 }
             }
         }
-        return "/userLogin";
+        return UserConstants.LOGIN_PAGE;
     }
-    
-     @RequestMapping(value = "invalidAccess")
+
+    @RequestMapping(value = UserConstants.INVALID_ACCESS_PAGE)
     public ModelAndView invalidAccess() {
-        return new ModelAndView("invalidAccess");
-        
+        return new ModelAndView(UserConstants.INVALID_ACCESS_PAGE);
+
     }
 }

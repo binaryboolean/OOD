@@ -27,6 +27,7 @@ public class User{
     private String userMobile;
     private String userId;
     private String userRole;
+    private String userPassword;
 
     public String getUserName() {
         return userName;
@@ -67,10 +68,13 @@ public class User{
     public void setUserRole(String userRole) {
         this.userRole = userRole;
     }
+    
+    public String getUserPassword() {
+        return userPassword;
+    }
 
-    @Override
-    public String toString() {
-        return "User{" + "userName=" + userName + ", userEmail=" + userEmail + ", userMobile=" + userMobile + ", userId=" + userId + ", userRole=" + userRole + '}';
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
     
 }

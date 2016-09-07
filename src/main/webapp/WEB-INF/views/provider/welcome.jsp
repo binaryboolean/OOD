@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="resources/css/bootstrap.min.css">
     </head>
     <body>
+        <img id="bg" src="<%=request.getContextPath()%>/resources/images/bg.jpg" />
         <div class="panel panel-primary col-lg-3" style="margin: 0 auto;float: none;text-align: center">
             <div class="panel-body">
                 ${greeting}

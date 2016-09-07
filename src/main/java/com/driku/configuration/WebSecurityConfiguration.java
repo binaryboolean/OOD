@@ -18,13 +18,18 @@ package com.driku.configuration;
 
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  *
@@ -42,11 +47,18 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery(
-                        "select user_email,password,enabled from ood_users where user_email=?")
-                .authoritiesByUsernameQuery(
-                        "select user_email, user_role from ood_user_roles where user_email=?");
+                .usersByUsernameQuery("select user_email,password,enabled from ood_users where user_email=?")
+                .authoritiesByUsernameQuery("select user_email, user_role from ood_user_roles where user_email=?");
     }
+    
+    @Autowired
+	@Qualifier("authenticationProvider")
+	AuthenticationProvider authenticationProvider;
+
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.authenticationProvider(authenticationProvider);
+	}
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -57,19 +69,16 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/consumer/**").access("hasRole('ROLE_CONSUMER')");
         http.authorizeRequests()
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
-        
+
         http.formLogin().loginProcessingUrl("/checkLogin")
                 .defaultSuccessUrl("/")
-                .loginPage("/welcome")
-                .failureUrl("/?error")
+                .loginPage("/")
+                .failureUrl("/error")
                 .usernameParameter("email").passwordParameter("password");
 
         http.logout().logoutUrl("/logout").logoutSuccessUrl("/");
-
         http.exceptionHandling().accessDeniedPage("/invalidAccess");
-
         http.csrf().disable();
 
     }
-
 }

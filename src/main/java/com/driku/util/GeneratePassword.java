@@ -14,23 +14,25 @@
  * or reproduction of this material is strictly forbidden unless prior written
  * permission is obtained from DRIKU Technologies
  */
-package com.driku.dao;
+package com.driku.util;
 
-import com.driku.model.User;
-import java.util.List;
+import java.util.Random;
 
 /**
  *
- * @author baldeep
+ * @author Baldeep Singh Kwatra
  */
-public interface UserDAO {
+public class GeneratePassword {
 
-    public User getUserByMobile(String mobileNumber);
+    /*Method for generating random password*/
+    private static final String RAW_CHARACTERS = "23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz";
+    static Random rnd = new Random();
 
-    public User getUserByEmail(String userEmail);
-
-    public List<User> getAllUsers();
-    
-    public User authenticateUser(String userEmail,String userPassword);
-
+    public static String randomPassword(int length) {
+        StringBuilder stringBuilder = new StringBuilder(10);
+        for (int i = 0; i < length; i++) {
+            stringBuilder.append(RAW_CHARACTERS.charAt(rnd.nextInt(RAW_CHARACTERS.length())));
+        }
+        return stringBuilder.toString();
+    }
 }

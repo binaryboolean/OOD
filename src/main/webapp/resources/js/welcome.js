@@ -59,3 +59,7 @@ function getUserByMobile() {
         }
     });
 }
+
+$(document).ready(function () {
+    $('#bg').fadeIn('slow');
+});

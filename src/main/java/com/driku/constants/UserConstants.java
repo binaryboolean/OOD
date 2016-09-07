@@ -22,15 +22,51 @@
 package com.driku.constants;
 public interface UserConstants {
 
+    /**
+     * Constants for SQL Queries
+     */
     String QUERY_SELECT_USER_BY_MOBILE="SELECT * FROM OOD_USERS WHERE MOBILE_NUMBER=?";
     String QUERY_SELECT_USER_BY_EMAIL="SELECT * FROM OOD_USERS WHERE USER_EMAIL=?";
-    
+    String QUERY_AUTHENTICATE_USER="SELECT * FROM OOD_USERS WHERE USER_EMAIL=? AND PASSWORD=?";
     String QUERY_SELECT_ALL_USER="SELECT * FROM OOD_USERS WHERE ROLE<>'ADMIN'";
     
-    
+    /**
+     * Constants for Column Names
+     */
     String COLUMN_USER_NAME="USER_NAME";
     String COLUMN_USER_EMAIL="USER_EMAIL";
     String COLUMN_MOBILE_NUMBER="MOBILE_NUMBER";
     String COLUMN_USER_ROLE="ROLE";
     String COLUMN_USER_ID="ID";
+    
+    /**
+     * Constants for User Roles
+     */
+    String ROLE_ADMIN="ROLE_ADMIN";
+    String ROLE_CONSUMER="ROLE_CONSUMER";
+    String ROLE_PROVIDER="ROLE_PROVIDER";
+    
+    /**
+     * Constants for Welcome page User Role Wise
+     */
+    String WELCOME_PAGE_ADMIN="/admin/welcome";
+    String WELCOME_PAGE_CONSUMER="/consumer/welcome";
+    String WELCOME_PAGE_PROVIDER="/provider/welcome";
+    
+    /**
+     * Login Page Constants
+     */
+    String LOGIN_PAGE="/userLogin";
+    /**
+     * Invalid Access Page
+     */
+    String INVALID_ACCESS_PAGE="/invalidAccess";
+    
+    /**
+     * Greeting Constants
+     */
+    String WELCOME_GREETING_KEY="greeting";
+    String WELCOME_GREETING_ADMIN="Admin: ";
+    String WELCOME_GREETING_CONSUMER="Consumer: ";
+    String WELCOME_GREETING_PROVIDER="Provider: ";
 }

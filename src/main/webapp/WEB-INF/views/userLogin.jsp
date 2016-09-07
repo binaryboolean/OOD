@@ -11,9 +11,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Login Page</title>
-        <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css">
     </head>
     <body>
+        <img id="bg" src="<%=request.getContextPath()%>/resources/images/bg.jpg" />
         <div class="panel panel-primary col-lg-3" style="margin: 0 auto;float: none;text-align: center">
             <div class="panel-body">
                 <h4>Login</h4>
@@ -31,4 +32,6 @@
             </div>
         </div>
     </body>
+    <script  src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script>$(document).ready(function () {$('#bg').fadeIn('slow');});</script>
 </html>
