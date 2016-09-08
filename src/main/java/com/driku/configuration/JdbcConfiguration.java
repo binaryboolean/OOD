@@ -32,6 +32,10 @@ public class JdbcConfiguration {
     @Autowired
     DataSource dataSource;
 
+    /**
+     * 
+     * @return database connection
+     */
     @Bean
     public JdbcTemplate getJdbcTemplate() {
         return new JdbcTemplate(dataSource);

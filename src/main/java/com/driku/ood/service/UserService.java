@@ -25,10 +25,24 @@ import java.util.List;
  */
 public interface UserService {
 
+    /**
+     * Service to get User by Email
+     * @param userEmail
+     * @return 
+     */
     public User getUserByEmail(String userEmail);
 
+    /**
+     * Service to get User by Mobile Number
+     * @param mobileNumber
+     * @return 
+     */
     public User getUserByMobile(String mobileNumber);
 
+    /**
+     * Service to get All Users
+     * @return 
+     */
     public List<User> getAllUsers();
 
     public User authenticateUser(String userEmail, String userPassword);

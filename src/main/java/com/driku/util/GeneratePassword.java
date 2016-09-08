@@ -24,10 +24,15 @@ import java.util.Random;
  */
 public class GeneratePassword {
 
-    /*Method for generating random password*/
+    
     private static final String RAW_CHARACTERS = "23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz";
     static Random rnd = new Random();
 
+    /**
+     * Method for generating random password
+     * @param length
+     * @return 
+     */
     public static String randomPassword(int length) {
         StringBuilder stringBuilder = new StringBuilder(10);
         for (int i = 0; i < length; i++) {

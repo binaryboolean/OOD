@@ -25,6 +25,7 @@
                     <div class="form-group">
                         <input class="form-control" type="password" placeholder="Password" name="password" title="Enter your Password here"/>
                     </div>
+                    <input style="display: none" type="checkbox" name="remember-me" checked="" />
                     <div class="form-group">
                         <input class="btn btn-primary" type="submit" value="Login" />
                     </div>

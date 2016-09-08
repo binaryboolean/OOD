@@ -16,7 +16,9 @@
  */
 package com.driku.configuration;
 
+import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -25,6 +27,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 /**
  *
@@ -38,12 +42,36 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     AuthenticationProvider authenticationProvider;
+    @Autowired
+    DataSource dataSource;
 
+    /**
+     * 
+     * @param auth
+     * @throws Exception 
+     */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider);
     }
+    
+    /**
+     * Invoked when user is remembered me
+     * @param auth
+     * @throws Exception 
+     */
+     @Autowired
+    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication().dataSource(dataSource)
+                .usersByUsernameQuery("select user_email,password,enabled from ood_users where user_email=?")
+                .authoritiesByUsernameQuery("select user_email, user_role from ood_user_roles where user_email=?");
+    }
 
+    /**
+     * 
+     * @param http
+     * @throws Exception 
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -60,9 +88,27 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .failureUrl("/?error")
                 .usernameParameter("email").passwordParameter("password");
 
+        //Remember me configuration
+        http.rememberMe().
+                tokenRepository(persistentTokenRepository()).
+                rememberMeParameter("remember-me").
+                rememberMeCookieName("OOD").
+                tokenValiditySeconds(2*365*24*60*60);// 2 years
+
         http.logout().logoutUrl("/logout").logoutSuccessUrl("/");
         http.exceptionHandling().accessDeniedPage("/invalidAccess");
         http.csrf().disable();
 
+    }
+
+    /**
+     * 
+     * @return Persistent Token
+     */
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+        tokenRepository.setDataSource(dataSource);
+        return tokenRepository;
     }
 }

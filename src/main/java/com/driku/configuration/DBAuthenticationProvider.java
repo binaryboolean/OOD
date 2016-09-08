@@ -45,6 +45,13 @@ public class DBAuthenticationProvider extends AbstractUserDetailsAuthenticationP
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
     }
 
+    /**
+     * 
+     * @param username
+     * @param authentication
+     * @return
+     * @throws AuthenticationException 
+     */
     @Override
     protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
         try {

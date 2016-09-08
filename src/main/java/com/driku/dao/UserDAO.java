@@ -25,12 +25,32 @@ import java.util.List;
  */
 public interface UserDAO {
 
+    /**
+     * Finds user based on matching mobile number
+     * @param mobileNumber of User
+     * @return 
+     */
     public User getUserByMobile(String mobileNumber);
 
+    /**
+     * Finds user based on matching email
+     * @param userEmail
+     * @return 
+     */
     public User getUserByEmail(String userEmail);
 
+    /**
+     * Finds all users.
+     * @return 
+     */
     public List<User> getAllUsers();
     
+    /**
+     * Authenticate user based on email and password
+     * @param userEmail
+     * @param userPassword
+     * @return 
+     */
     public User authenticateUser(String userEmail,String userPassword);
 
 }

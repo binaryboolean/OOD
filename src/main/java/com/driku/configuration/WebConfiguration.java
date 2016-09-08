@@ -50,6 +50,10 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     @Value("${db.driverClassName}")
     private String driverClassName;
 
+    /**
+     * Resolver method which adds suffix to the URI and according finds the correct views.
+     * @return object of viewResolver
+     */
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -59,12 +63,20 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         return viewResolver;
     }
 
+    /**
+     * Used to enable access of static resource files like css,js,images
+     * @param registry 
+     */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**")
                 .addResourceLocations("/resources/");
     }
-
+    
+    /**
+     * Creates a database connection
+     * @return driverManagerDataSource Object
+     */
     @Bean(name = "dataSource")
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
@@ -75,11 +87,19 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         return driverManagerDataSource;
     }
 
+    /**
+     * Created to access properties from Properties file using @PropertySource
+     * @return 
+     */
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
     }
 
+    /**
+     * Handler to make session timeout to -1
+     * @param registry 
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new SessionHandler());

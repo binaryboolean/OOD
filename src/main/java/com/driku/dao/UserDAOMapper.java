@@ -28,6 +28,13 @@ import org.springframework.jdbc.core.RowMapper;
  */
 public class UserDAOMapper implements RowMapper<User> {
 
+    /**
+     * Used to map database row with User Model
+     * @param rs resultset reference
+     * @param i
+     * @return
+     * @throws SQLException 
+     */
     @Override
     public User mapRow(ResultSet rs, int i) throws SQLException {
         User user = new User();
