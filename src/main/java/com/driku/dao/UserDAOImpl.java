@@ -64,9 +64,9 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User authenticateUser(String userEmail,String userPassword) {
-         try {
-            return jdbcTemplate.queryForObject(UserConstants.QUERY_AUTHENTICATE_USER, new UserDAOMapper(), userEmail,userPassword);
+    public User authenticateUser(String userEmail, String userPassword) {
+        try {
+            return jdbcTemplate.queryForObject(UserConstants.QUERY_AUTHENTICATE_USER, new UserDAOMapper(), userEmail, userPassword);
         } catch (EmptyResultDataAccessException e) {
         }
         return null;

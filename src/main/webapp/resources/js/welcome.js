@@ -35,7 +35,7 @@ function getUserByMobile() {
     $('#allUsersDiv').empty();
     $.ajax({
         type: "GET",
-        url: "admin/" + $('#mobileNumber').val(),
+        url: "admin/getUserByMobile/" + $('#mobileNumber').val(),
         success: function (data)
         {
             if (data) {

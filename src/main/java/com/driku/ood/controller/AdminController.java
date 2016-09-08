@@ -16,6 +16,7 @@
  */
 package com.driku.ood.controller;
 
+import com.driku.constants.AdminConstants;
 import com.driku.model.User;
 import com.driku.ood.service.UserService;
 import java.util.List;
@@ -37,14 +38,14 @@ public class AdminController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/admin/{mobileNumber}", method = RequestMethod.GET)
+    @RequestMapping(value = AdminConstants.URL_GET_USER_BY_MOBILE, method = RequestMethod.GET)
     @ResponseBody
     public User getUserByMobile(@PathVariable String mobileNumber, ModelMap model) {
         return userService.getUserByMobile(mobileNumber);
 
     }
 
-    @RequestMapping(value = "/admin/getAllUsers", method = RequestMethod.GET)
+    @RequestMapping(value = AdminConstants.URL_GET_ALL_USERS, method = RequestMethod.GET)
     @ResponseBody
     public List<User> getAllUser() {
         return userService.getAllUsers();

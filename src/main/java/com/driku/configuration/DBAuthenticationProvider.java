@@ -16,14 +16,12 @@
  */
 package com.driku.configuration;
 
-
 /**
  *
  * @author Baldeep Singh Kwatra
  */
-
+import com.driku.constants.UserConstants;
 import com.driku.ood.service.UserService;
-import com.driku.util.EncryptPassword;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
@@ -49,14 +47,11 @@ public class DBAuthenticationProvider extends AbstractUserDetailsAuthenticationP
 
     @Override
     protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
-
         try {
             String password = (String) authentication.getCredentials();
-            password = BCrypt.hashpw(password, EncryptPassword.SALT);
-            System.out.println("Pwd"+password);
-            // find the saved user again.
-            com.driku.model.User user = userService.authenticateUser(username, password);
+            password = BCrypt.hashpw(password, UserConstants.SALT);
 
+            com.driku.model.User user = userService.authenticateUser(username, password);
             if (user != null) {
                 final List<GrantedAuthority> auths;
                 if (!user.getUserRole().isEmpty()) {
@@ -64,7 +59,7 @@ public class DBAuthenticationProvider extends AbstractUserDetailsAuthenticationP
                 } else {
                     auths = AuthorityUtils.NO_AUTHORITIES;
                 }
-                return new User(user.getUserEmail(), user.getUserPassword(), auths);
+                return new User(user.getUserEmail(), password, auths);
             }
 
         } catch (Exception repositoryProblem) {

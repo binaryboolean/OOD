@@ -28,7 +28,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = UserConstants.DEFAULT_URL, method = RequestMethod.GET)
     public String welcomePage(ModelMap model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = auth.getName();

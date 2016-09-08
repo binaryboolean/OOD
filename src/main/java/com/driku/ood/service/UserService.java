@@ -24,8 +24,12 @@ import java.util.List;
  * @author baldeep
  */
 public interface UserService {
+
     public User getUserByEmail(String userEmail);
+
     public User getUserByMobile(String mobileNumber);
+
     public List<User> getAllUsers();
-    public User authenticateUser(String userEmail,String userPassword);
+
+    public User authenticateUser(String userEmail, String userPassword);
 }

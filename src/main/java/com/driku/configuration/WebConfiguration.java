@@ -23,8 +23,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.session.web.http.CookieSerializer;
-import org.springframework.session.web.http.DefaultCookieSerializer;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -49,6 +47,8 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     private String jdbcUsername;
     @Value("${db.password.${mode}}")
     private String jdbcPassword;
+    @Value("${db.driverClassName}")
+    private String driverClassName;
 
     @Bean
     public ViewResolver viewResolver() {
@@ -68,7 +68,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     @Bean(name = "dataSource")
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-        driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        driverManagerDataSource.setDriverClassName(driverClassName);
         driverManagerDataSource.setUrl(jdbcUrl);
         driverManagerDataSource.setUsername(jdbcUsername);
         driverManagerDataSource.setPassword(jdbcPassword);

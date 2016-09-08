@@ -36,7 +36,6 @@ public class UserDAOMapper implements RowMapper<User> {
         user.setUserMobile(rs.getString(UserConstants.COLUMN_MOBILE_NUMBER));
         user.setUserName(rs.getString(UserConstants.COLUMN_USER_NAME));
         user.setUserRole(rs.getString(UserConstants.COLUMN_USER_ROLE));
-        System.out.println(user);
         return user;
     }
 }

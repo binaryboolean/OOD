@@ -63,10 +63,20 @@ public interface UserConstants {
     String INVALID_ACCESS_PAGE="/invalidAccess";
     
     /**
+     * Default URL
+     */
+    String DEFAULT_URL="/";
+    
+    /**
      * Greeting Constants
      */
     String WELCOME_GREETING_KEY="greeting";
     String WELCOME_GREETING_ADMIN="Admin: ";
     String WELCOME_GREETING_CONSUMER="Consumer: ";
     String WELCOME_GREETING_PROVIDER="Provider: ";
+    
+    /**
+     * SALT for HASH
+     */
+    public static final String SALT = "$2a$08$nv8/8OQhGiZ7wzaFB4SoSO6wQeHErBRARhicAjbv0ZMctopyB0F.W";
 }
